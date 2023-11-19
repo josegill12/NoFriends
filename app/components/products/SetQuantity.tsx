@@ -4,7 +4,7 @@ import { CartProduct } from "@/app/product/[productId]/ProductDetails";
 
 interface SetQtyProps {
   cartCounter?: boolean;
-  cartProduct: CartProduct;
+  CartProduct: CartProduct;
   handleQtyIncrease: () => void;
   handleQtyDecrease: () => void;
 }
@@ -12,7 +12,7 @@ interface SetQtyProps {
 const btnStyles = "border-[1.2px] border-slate-300 px-2 rounded";
 
 const SetQuantity: React.FC<SetQtyProps> = ({
-  cartProduct,
+  CartProduct,
   handleQtyIncrease,
   handleQtyDecrease,
   cartCounter = false,
@@ -30,7 +30,7 @@ const SetQuantity: React.FC<SetQtyProps> = ({
         <button onClick={handleQtyDecrease} className={btnStyles}>
           -
         </button>
-        <div>{cartProduct.quantity}</div>
+        <div>{CartProduct.quantity}</div>
         <button onClick={handleQtyIncrease} className={btnStyles}>
           +
         </button>

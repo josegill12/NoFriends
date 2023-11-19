@@ -1,4 +1,4 @@
-import CartProvider from "@/providers/CartProvider";
+import CartProvider from "../providers/CartProvider";
 import getCurrentUser from "../actions/getCurrentUser";
 import NavBar from "./components/navbar/NavBar";
 import "./globals.css";

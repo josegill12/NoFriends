@@ -25,6 +25,15 @@ model User {
   reviews Review[]
 }
 
+model Profile {
+  id        Int    @id @default(autoincrement())
+  userId    Int
+  User      User   @relation(fields: [userId], references: [id])
+  firstName String
+  lastName  String
+  // Add other profile fields as needed
+}
+
 model Account{
   id String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @db.ObjectId

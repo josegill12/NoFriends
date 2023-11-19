@@ -40,9 +40,9 @@ const HorizontalLine = () => {
 };
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
-  const { handleAddProductToCart, cartProducts } = useCart();
+  const { handleAddProductToCart, CartProducts } = useCart();
   const [isProductInCart, setIsProductInCart] = useState(false);
-  const [cartProduct, setCartProduct] = useState<CartProduct>({
+  const [CartProduct, setCartProduct] = useState<CartProduct>({
     id: product.id,
     name: product.name,
     description: product.description,
@@ -59,8 +59,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   useEffect(() => {
     setIsProductInCart(false);
 
-    if (cartProducts) {
-      const existingIndex = cartProducts.findIndex(
+    if (CartProducts) {
+      const existingIndex = CartProducts.findIndex(
         (item) => item.id === product.id
       );
 
@@ -68,7 +68,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         setIsProductInCart(true);
       }
     }
-  }, [cartProducts]);
+  }, [CartProducts]);
 
   const handleColorSelect = useCallback(
     (value: SelectedImage) => {
@@ -76,28 +76,28 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         return { ...prev, selectedImage: value };
       });
     },
-    [cartProduct.selectedImage]
+    [CartProduct.selectedImage]
   );
 
   const handleQtyIncrease = useCallback(() => {
-    if (cartProduct.quantity === 20) {
+    if (CartProduct.quantity === 20) {
       return toast.error("Oops! Maximum reached.");
     }
 
     setCartProduct((prev) => {
       return { ...prev, quantity: ++prev.quantity };
     });
-  }, [cartProduct]);
+  }, [CartProduct]);
 
   const handleQtyDecrease = useCallback(() => {
-    if (cartProduct.quantity === 1) {
+    if (CartProduct.quantity === 1) {
       return toast.error("Oops! Minimum reached.");
     }
 
     setCartProduct((prev) => {
       return { ...prev, quantity: --prev.quantity };
     });
-  }, [cartProduct]);
+  }, [CartProduct]);
 
   const ProductRating =
     product.reviews.reduce((acc, item) => item.rating + acc, 0) /
@@ -106,7 +106,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
       <ProductImage
-        cartProduct={cartProduct}
+        CartProduct={CartProduct}
         product={product}
         handleColorSelect={handleColorSelect}
       />
@@ -152,12 +152,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           <>
             <SetColor
               images={product.images}
-              cartProduct={cartProduct}
+              CartProduct={CartProduct}
               handleColorSelect={handleColorSelect}
             />
             <HorizontalLine />
             <SetQuantity
-              cartProduct={cartProduct}
+              CartProduct={CartProduct}
               handleQtyIncrease={handleQtyIncrease}
               handleQtyDecrease={handleQtyDecrease}
             />
@@ -166,7 +166,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
               <Button
                 label="Add To Cart"
                 onClick={() => {
-                  handleAddProductToCart(cartProduct);
+                  handleAddProductToCart(CartProduct);
                 }}
               />
             </div>

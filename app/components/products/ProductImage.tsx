@@ -6,13 +6,13 @@ import { Product } from "@prisma/client";
 import Image from "next/image";
 
 interface ProductImageProps {
-  cartProduct: CartProduct;
+  CartProduct: CartProduct;
   product: Product;
   handleColorSelect: (value: SelectedImage) => void;
 }
 
 const ProductImage: React.FC<ProductImageProps> = ({
-  cartProduct,
+  CartProduct,
   product,
   handleColorSelect,
 }) => {
@@ -55,7 +55,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
               rounded
               border-teal-300
               ${
-                cartProduct.selectedImage.color === image.color
+                CartProduct.selectedImage.color === image.color
                   ? "border-[1.5px]"
                   : "border-none"
               }
@@ -89,8 +89,8 @@ const ProductImage: React.FC<ProductImageProps> = ({
             min-h-[300px]
             sm:min-h-[400px]
             "
-          src={cartProduct.selectedImage.image}
-          alt={cartProduct.name}
+          src={CartProduct.selectedImage.image}
+          alt={CartProduct.name}
         />
       </div>
     </div>

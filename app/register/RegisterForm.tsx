@@ -44,7 +44,8 @@ const RegisterForm: React.FC<RegisterUserProps> = ({ currentUser }) => {
 
     axios
       .post("/api/register", data)
-      .then(() => {
+      .then((response) => {
+       
         toast.success("Account created");
 
         signIn("credentials", {

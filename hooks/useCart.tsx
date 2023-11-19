@@ -9,7 +9,7 @@ import {
 import { toast } from "react-hot-toast";
 
 type CartContextTypes = {
-  cartProducts: CartProduct[] | null;
+  CartProducts: CartProduct[] | null;
   handleAddProductToCart: (product: CartProduct) => void;
   handleRemoveProductFromCart: (product: CartProduct) => void;
   handleCartQtyIncrease: (product: CartProduct) => void;
@@ -28,25 +28,25 @@ export interface Props {
 export const CartContext = createContext<CartContextTypes | null>(null);
 
 export const CartContextProvider = (props: Props) => {
-  const [cartProducts, setCartProducts] = useState<CartProduct[] | null>(null);
+  const [CartProducts, setCartProducts] = useState<CartProduct[] | null>(null);
   const [cartTotalQty, setCartTotalQty] = useState(0);
   const [cartTotalAmount, setCartTotalAmount] = useState(0);
   const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
 
   useEffect(() => {
     const cartItems: any = localStorage.getItem("eShopCartItems");
-    const cartProducts: CartProduct[] | null = JSON.parse(cartItems);
+    const CartProducts: CartProduct[] | null = JSON.parse(cartItems);
     const eShopPaymentIntent: any = localStorage.getItem("eShopPaymentIntent");
     const paymentIntent: string | null = JSON.parse(eShopPaymentIntent);
 
-    setCartProducts(cartProducts);
+    setCartProducts(CartProducts);
     setPaymentIntent(paymentIntent);
   }, []);
 
   useEffect(() => {
     const getTotals = () => {
-      if (cartProducts) {
-        const { total, qty } = cartProducts.reduce(
+      if (CartProducts) {
+        const { total, qty } = CartProducts.reduce(
           (acc, item) => {
             const itemTotal = item.price * item.quantity;
 
@@ -67,7 +67,7 @@ export const CartContextProvider = (props: Props) => {
     };
 
     getTotals();
-  }, [cartProducts]);
+  }, [CartProducts]);
 
   const handleAddProductToCart = useCallback((product: CartProduct) => {
     setCartProducts((prev) => {
@@ -87,9 +87,9 @@ export const CartContextProvider = (props: Props) => {
 
   const handleRemoveProductFromCart = useCallback(
     (product: CartProduct) => {
-      if (cartProducts) {
-        console.log("cartP", cartProducts, product);
-        const filteredProducts = cartProducts?.filter((item) => {
+      if (CartProducts) {
+        console.log("cartP", CartProducts, product);
+        const filteredProducts = CartProducts?.filter((item) => {
           return item.id !== product.id;
         });
 
@@ -101,7 +101,7 @@ export const CartContextProvider = (props: Props) => {
         toast.success("Product removed");
       }
     },
-    [cartProducts]
+    [CartProducts]
   );
 
   const handleCartQtyIncrease = useCallback(
@@ -112,12 +112,12 @@ export const CartContextProvider = (props: Props) => {
         return toast.error("Oops! Maximum reached.");
       }
 
-      if (cartProducts) {
-        const existingIndex = cartProducts.findIndex(
+      if (CartProducts) {
+        const existingIndex = CartProducts.findIndex(
           (item) => item.id === product.id
         );
 
-        updatedCart = [...cartProducts];
+        updatedCart = [...CartProducts];
 
         if (existingIndex > -1) {
           updatedCart[existingIndex].quantity = ++updatedCart[existingIndex]
@@ -128,7 +128,7 @@ export const CartContextProvider = (props: Props) => {
         localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
       }
     },
-    [cartProducts]
+    [CartProducts]
   );
 
   const handleCartQtyDecrease = useCallback(
@@ -139,12 +139,12 @@ export const CartContextProvider = (props: Props) => {
         return toast.error("Oops! Minimum reached.");
       }
 
-      if (cartProducts) {
-        const existingIndex = cartProducts.findIndex(
+      if (CartProducts) {
+        const existingIndex = CartProducts.findIndex(
           (item) => item.id === product.id
         );
 
-        updatedCart = [...cartProducts];
+        updatedCart = [...CartProducts];
 
         if (existingIndex > -1) {
           updatedCart[existingIndex].quantity = --updatedCart[existingIndex]
@@ -155,14 +155,14 @@ export const CartContextProvider = (props: Props) => {
         localStorage.setItem("eShopCartItems", JSON.stringify(updatedCart));
       }
     },
-    [cartProducts]
+    [CartProducts]
   );
 
   const handleClearCart = useCallback(() => {
     setCartProducts(null);
     setCartTotalQty(0);
     localStorage.setItem("eShopCartItems", JSON.stringify(null));
-  }, [cartProducts]);
+  }, [CartProducts]);
 
   const handleSetPaymentIntent = useCallback(
     (val: string | null) => {
@@ -174,7 +174,7 @@ export const CartContextProvider = (props: Props) => {
   );
 
   const value = {
-    cartProducts,
+    CartProducts,
     handleAddProductToCart,
     handleRemoveProductFromCart,
     handleCartQtyIncrease,

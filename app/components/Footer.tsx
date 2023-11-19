@@ -18,24 +18,20 @@ const Footer = () => {
             <Link href="#">Phones</Link>
             <Link href="#">Laptops</Link>
             <Link href="#">Desktops</Link>
-            <Link href="#">Watches</Link>
-            <Link href="#">TVs</Link>
-            <Link href="#">Accessories</Link>
+            <Link href="#">3D Models</Link>
           </FooterList>
           <FooterList>
             <h3 className="text-base font-bold mb-2">Customer Service</h3>
             <Link href="#">Contact Us</Link>
             <Link href="#">Shipping Policy</Link>
             <Link href="#">Returns & Exchanges</Link>
-            <Link href="#">Watches</Link>
             <Link href="#">FAQs</Link>
           </FooterList>
           <div className="w-full md:w-1/3 mb-6 md:mb-0">
             <h3 className="text-base font-bold mb-2">About Us</h3>
             <p className="mb-2">
-              At our electronics store, we are dedicated to providing the latest
-              and greatest devices and accessories to our customers. With a wide
-              selection of phones, TVs, laptops, watches, and accessories.
+             At No-Friends come make a friend from our 3D models to Fixing you Electronic 
+             devices we are here to help you.
             </p>
             <p className="text-sm">
               &copy; {new Date().getFullYear()} E~Shop. All rights reserved.

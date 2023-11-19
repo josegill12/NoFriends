@@ -8,13 +8,13 @@ import {
 
 interface SetColorProps {
   images: UploadedImageType[];
-  cartProduct: CartProduct;
+  CartProduct: CartProduct;
   handleColorSelect: (value: SelectedImage) => void;
 }
 
 const SetColor: React.FC<SetColorProps> = ({
   images,
-  cartProduct,
+  CartProduct,
   handleColorSelect,
 }) => {
   return (
@@ -35,7 +35,7 @@ const SetColor: React.FC<SetColorProps> = ({
             items-center
             justify-center
             ${
-              cartProduct.selectedImage.color === image.color
+              CartProduct.selectedImage.color === image.color
                 ? "border-[1.5px]"
                 : "border-none"
             }
